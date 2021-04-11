@@ -11,8 +11,9 @@ Real-time visibility to the liquidity across different exchanges for Bitcoin.
 You will need a Cryptowatch [API key](https://cryptowat.ch/account/api-access), which should take just a few minutes to obtain (for free).
 1. Clone this repository.
 2. Run `npm install`
-3. Run `nodemon server.js`
-4. Open your browser at `http://localhost:8080/`
+3. Set the API key [here](https://github.com/jw122/crypto-market-data/blob/main/server.js#L36)
+4. Run `nodemon server.js`
+5. Open your browser at `http://localhost:8080/`
 
 ## How It's Made
 
