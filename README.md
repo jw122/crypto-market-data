@@ -29,6 +29,7 @@ Other data sources considered:
 - [Shrimpy](https://developers.shrimpy.io/)
 - [CoinAPI](https://docs.coinapi.io/#hello)
 - [Nomics](https://nomics.com/assets/btc-bitcoin#chart)
+- [0x API](https://0x.org/api)
 
 ## Limitations & Alternatives
 For demonstration purposes, only a subset of bid/ask orders (out of hundreds or thousands polled every few seconds) are sent to the client. Ideally, the client should be able to render a more continuous stream of updates. On the client side, a more responsive framework or library could be used instead.
