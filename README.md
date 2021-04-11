@@ -1,5 +1,7 @@
-# crypto-market-data
+# Live Crypto Market Data
 
-<!-- ![](https://github.com/jw122/crypto-market-data/blob/main/assets/demo.gif) -->
+Real-time visibility to the liquidity across different exchanges for Bitcoin.
 
-<img src="assets/demo.gif" alt="alt text" width="500px">
+<img src="assets/demo.gif" alt="alt text" width="600px">
+
+[1 minute video](https://youtu.be/5_E39Ck5PfI)
