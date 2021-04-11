@@ -24,6 +24,11 @@
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/84903da61a.js" crossorigin="anonymous"></script>
 
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;600&display=swap"
+        rel="stylesheet">
+
 </head>
 <script src="http://localhost:8080/socket.io/socket.io.js"></script>
 
@@ -44,15 +49,15 @@
             bids.forEach(bid => {
                 console.log("Bid " + bid.amountStr + "BTC at price " + bid.priceStr)
 
-                const order = `<i class="fas fa-tag"></i> bid <b>` + bid.amountStr + `</b> BTC at price <b>` + formatCurrency(bid.priceStr, true) + `</b>`
-                bidsDiv.innerHTML += `<p style="margin: 0px">[` + exchange + "] " + currentTime + "</p>"
+                const order = `<i class="fas fa-tag"></i> bid <b>` + bid.amountStr + `</b> BTC at price <b><span style="color: red">` + formatCurrency(bid.priceStr, true) + `</span></b>`
+                bidsDiv.innerHTML += `<p style="margin: 0px"><span style="color:chartreuse"><b>[` + exchange + "]</b></span> " + currentTime + "</p>"
                 bidsDiv.innerHTML += "<p>" + order + "</p>"
                 bidsDiv.scrollTop = bidsDiv.scrollHeight;
             });
 
             asks.forEach(ask => {
-                const order = `<i class="fas fa-question-circle"></i> ask <b>` + ask.amountStr + `</b> BTC at price <b>` + formatCurrency(ask.priceStr, true) + `</b>`
-                asksDiv.innerHTML += `<p style="margin: 0px">[` + exchange + "] " + currentTime + "</p>"
+                const order = `<i class="fas fa-question-circle"></i> ask <b>` + ask.amountStr + `</b> BTC at price <b><span style="color: red">` + formatCurrency(ask.priceStr, true) + `</span></b>`
+                asksDiv.innerHTML += `<p style="margin: 0px"><span style="color:chartreuse"><b>[` + exchange + "]</b></span> " + currentTime + "</p>"
                 asksDiv.innerHTML += "<p>" + order + "</p>"
                 asksDiv.scrollTop = asksDiv.scrollHeight;
             });
@@ -76,16 +81,21 @@
 </script>
 
 <body>
-    <h1>Live BTC Orders</h1>
+    <div class="row" id="topBanner">
+        <h1><i class="fab fa-bitcoin" style="color: goldenrod;"></i> Live BTC Orders</h1>
+    </div>
 
-    <div class="row">
+    <div class="row" id="orderBookDiv">
 
-        <div class="col-md-6" id="bidsDiv" style="overflow-y: scroll; height:600px;">
+        <div class="col-md-6">
             <h3>Bids</h3>
+            <div id="bidsDiv" style="overflow-y: scroll; height:750px;"></div>
+
         </div>
 
-        <div class="col-md-6" id="asksDiv" style="overflow-y: scroll; height:600px;">
+        <div class="col-md-6">
             <h3>Asks</h3>
+            <div id="asksDiv" style="overflow-y: scroll; height:750px;"></div>
         </div>
     </div>
 

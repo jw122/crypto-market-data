@@ -1,0 +1,22 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: "Source Code Pro", monospace;
+}
+
+p {
+  font-weight: 200;
+  /* color: chartreuse; */
+}
+
+#orderBookDiv,
+#topBanner {
+  padding: 2em;
+}
+
+/* @media screen and (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: black;
+  }
+} */
