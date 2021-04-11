@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello world</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- jquery, popper, bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/84903da61a.js" crossorigin="anonymous"></script>
+
+</head>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io();
+
+    socket.on("new_message", (data) => {
+        // clear the existing table
+        console.log("got data: ", data)
+        const message = data.message;
+        if (message.exchange && message.bids && message.asks) {
+            const exchange = message.exchange;
+            console.log("exchange: ", exchange);
+            const bids = message.bids;
+            const asks = message.asks;
+            const currentTime = new Date();
+
+            bids.forEach(bid => {
+                console.log("Bid " + bid.amountStr + "BTC at price " + bid.priceStr)
+
+                const order = `<i class="fas fa-tag"></i> bid <b>` + bid.amountStr + `</b> BTC at price <b>` + formatCurrency(bid.priceStr, true) + `</b>`
+                bidsDiv.innerHTML += `<p style="margin: 0px">[` + exchange + "] " + currentTime + "</p>"
+                bidsDiv.innerHTML += "<p>" + order + "</p>"
+                bidsDiv.scrollTop = bidsDiv.scrollHeight;
+            });
+
+            asks.forEach(ask => {
+                const order = `<i class="fas fa-question-circle"></i> ask <b>` + ask.amountStr + `</b> BTC at price <b>` + formatCurrency(ask.priceStr, true) + `</b>`
+                asksDiv.innerHTML += `<p style="margin: 0px">[` + exchange + "] " + currentTime + "</p>"
+                asksDiv.innerHTML += "<p>" + order + "</p>"
+                asksDiv.scrollTop = asksDiv.scrollHeight;
+            });
+        }
+
+
+    })
+
+    let formatCurrency = (amount, isUsd = true) => {
+        var formatted = amount;
+        if (parseInt(amount) >= 1000) {
+            formatted = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        if (isUsd) {
+            return '$' + formatted;
+        } else {
+            return formatted;
+        }
+    }
+</script>
+
+<body>
+    <h1>Live BTC Orders</h1>
+
+    <div class="row">
+
+        <div class="col-md-6" id="bidsDiv" style="overflow-y: scroll; height:600px;">
+            <h3>Bids</h3>
+        </div>
+
+        <div class="col-md-6" id="asksDiv" style="overflow-y: scroll; height:600px;">
+            <h3>Asks</h3>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
